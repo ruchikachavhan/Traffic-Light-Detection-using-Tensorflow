@@ -12,16 +12,19 @@ up_arrow=[]
 #Reading images
 os.chdir('/home/ruchika/Documents/Summer of Science ML/traffic_light/onlyGreen1_resized') 
 for image in os.listdir('/home/ruchika/Documents/Summer of Science ML/traffic_light/onlyGreen1'):
-	img= cv2.imread(image)
-	up.append()
+	img= cv2.imread(image,0)
+	img= cv2.resize(img, (28,28))
+	up.append(img)
 os.chdir('/home/ruchika/Documents/Summer of Science ML/traffic_light/onlyGreen2_resized') 
 for image in os.listdir('/home/ruchika/Documents/Summer of Science ML/traffic_light/onlyGreen2'):
-	img= cv2.imread(image)
-	left_arrow.append()
+	img= cv2.imread(image,0)
+	img= cv2.resize(img, (28,28))
+	left_arrow.append(img)
 os.chdir('/home/ruchika/Documents/Summer of Science ML/traffic_light/onlyGreen3_resized')
 for image in os.listdir('/home/ruchika/Documents/Summer of Science ML/traffic_light/onlyGreen3'):
-	img= cv2.imread(image)
-	right_arrow.append()
+	img= cv2.imread(image,0)
+	img= cv2.resize(img, (28,28))
+	right_arrow.append(img)
 
 total_examples= len(right_arrow)+ len(left_arrow)+ len(up_arrow)
 labels= np.zeros([total_examples, 3])
