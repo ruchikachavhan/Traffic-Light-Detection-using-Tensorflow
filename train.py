@@ -8,22 +8,23 @@ import os
 right_arrow=[]
 left_arrow=[]
 up_arrow=[]
-
+error= 'error.txt'
+error_file= open(error, 'w')
 #Reading images
 os.chdir('/home/ruchika/Documents/Summer of Science ML/traffic_light/onlyGreen1') 
 for image in os.listdir('/home/ruchika/Documents/Summer of Science ML/traffic_light/onlyGreen1'):
 	img= cv2.imread(image,0)
-	re= cv2.resize(img, (28,28))
+	re= cv2.resize(img, (100,100))
 	up_arrow.append(re)
 os.chdir('/home/ruchika/Documents/Summer of Science ML/traffic_light/onlyGreen2') 
 for image in os.listdir('/home/ruchika/Documents/Summer of Science ML/traffic_light/onlyGreen2'):
 	img= cv2.imread(image,0)
-	re= cv2.resize(img, (28,28))
+	re= cv2.resize(img, (100,100))
 	left_arrow.append(re)
 os.chdir('/home/ruchika/Documents/Summer of Science ML/traffic_light/onlyGreen3')
 for image in os.listdir('/home/ruchika/Documents/Summer of Science ML/traffic_light/onlyGreen3'):
 	img= cv2.imread(image,0)
-	re= cv2.resize(img, (28,28))
+	re= cv2.resize(img, (100,100))
 	right_arrow.append(re)
 
 total_examples= len(right_arrow)+ len(left_arrow)+ len(up_arrow)
@@ -42,7 +43,7 @@ for k in range(len(up_arrow)+len(left_arrow), len(up_arrow)+len(left_arrow)+len(
 
 #Defining hyperparameters of neural network 
 learning_rate= 0.0001
-epochs= 10
+epochs= 30
 print(labels[0].shape)
 #Defining model of the neural network
 def create_new_conv_layer(input, channels, filters, filter_shape, pool_shape, name):
@@ -58,47 +59,43 @@ def create_new_conv_layer(input, channels, filters, filter_shape, pool_shape, na
 	return out_layer
 
 #Defining placeholders
-x = tf.placeholder(tf.float32, [28, 28])
-input_x = tf.reshape(x, [-1, 28,28, 1])
+x = tf.placeholder(tf.float32, [100,100])
+input_x = tf.reshape(x, [-1, 100,100, 1])
 y = tf.placeholder(tf.float32, [3])
 
 #Calculating convolutional layer
 layer1 = create_new_conv_layer(input_x, 1, 32, [5, 5], [2, 2], name='layer1')
 layer2 = create_new_conv_layer(layer1, 32, 64, [5, 5], [2, 2], name='layer2')
-
+layer3 = create_new_conv_layer(layer2, 64, 128, [5, 5], [2, 2], name='layer3')
+print(layer3)
 #Flattening 
-flattened = tf.reshape(layer2, [-1, 7 * 7 * 64])
+flattened = tf.reshape(layer3, [-1,13*13*128 ])
 
 #Defining the rest of the model
 #Layer1
-weights1 = tf.get_variable(initializer=tf.truncated_normal([7*7*64, 10000], stddev=0.03), name='weights1')
-b1= tf.get_variable(initializer= tf.truncated_normal([10000], stddev=0.01), name='b1')
+weights1 = tf.get_variable(initializer=tf.truncated_normal([13*13*128, 1000], stddev=0.03), name='weights1')
+b1= tf.get_variable(initializer= tf.truncated_normal([1000], stddev=0.01), name='b1')
 dense_layer1 =tf.add( tf.matmul(flattened, weights1), b1)
 dense_layer1 = tf.nn.relu(dense_layer1)
 #Layer2
-weights2 = tf.get_variable(initializer=tf.truncated_normal([10000, 3], stddev=0.03), name='weights2')
-b2 = tf.get_variable(initializer= tf.truncated_normal([3], stddev=0.01), name='b2')
+weights2 = tf.get_variable(initializer=tf.truncated_normal([1000, 800], stddev=0.03), name='weights2')
+b2 = tf.get_variable(initializer= tf.truncated_normal([800], stddev=0.01), name='b2')
 dense_layer2 = tf.add(tf.matmul(dense_layer1, weights2), b2)
 y_ = tf.nn.softmax(dense_layer2)
 #Calculating cross- entropy
 print("dense_layer2",tf.transpose(dense_layer2))
 cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=dense_layer2, labels=y))
 optimiser = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cross_entropy)
-
-# define an accuracy assessment operation
-# correct_prediction = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))
-# accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
-
-# setup the initialisation operator
-with tf.Session() as sess:
-    # initialise the get_variables
-    sess.run(tf.global_variables_initializer())
-    for epoch in range(epochs):
-        avg_cost = 0.0
-        for i in range(0, len(examples)):
-        	t=[]
-        	for ty in range (0, len(labels[0])):
-        		t.append(labels[i][ty])
-        	_, c= sess.run([optimiser, cross_entropy], feed_dict= {x: examples[i], y:t})
-        	avg_cost=avg_cost+c
-        print(avg_cost)
+sess= tf.InteractiveSession()
+sess.run(tf.global_variables_initializer())
+for epoch in range(epochs):
+    avg_cost = 0.0
+    for i in range(0, len(examples)):
+    	t=[]
+    	for ty in range (0, len(labels[0])):
+    		t.append(labels[i][ty])
+    	_, c= sess.run([optimiser, cross_entropy], feed_dict= {x: examples[i], y:t})
+    	avg_cost=avg_cost+c
+    print(avg_cost)
+    error_file.write(str(avg_cost))
+    error_file.write("\n")
