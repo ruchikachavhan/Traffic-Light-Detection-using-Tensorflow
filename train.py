@@ -78,8 +78,8 @@ b1= tf.get_variable(initializer= tf.truncated_normal([1000], stddev=0.01), name=
 dense_layer1 =tf.add( tf.matmul(flattened, weights1), b1)
 dense_layer1 = tf.nn.relu(dense_layer1)
 #Layer2
-weights2 = tf.get_variable(initializer=tf.truncated_normal([1000, 800], stddev=0.03), name='weights2')
-b2 = tf.get_variable(initializer= tf.truncated_normal([800], stddev=0.01), name='b2')
+weights2 = tf.get_variable(initializer=tf.truncated_normal([1000, 3], stddev=0.03), name='weights2')
+b2 = tf.get_variable(initializer= tf.truncated_normal([3], stddev=0.01), name='b2')
 dense_layer2 = tf.add(tf.matmul(dense_layer1, weights2), b2)
 y_ = tf.nn.softmax(dense_layer2)
 #Calculating cross- entropy
