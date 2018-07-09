@@ -5,4 +5,4 @@ thresholding green out of the images -> resizing images into 100*100 ->  three l
 
 
 
-![alt text](/home/ruchika/Documents/Summer of Science ML/traffic_light/1/29.jpg "Image of traffic light")
+![alt text](/home/ruchika/Documents/Summer of Science ML/traffic_light/1/29.png "Image of traffic light")
