@@ -16,13 +16,19 @@ Arrow pointing towards left
 
 #Results:
 
-![test2](https://user-images.githubusercontent.com/32021556/42466183-b694a82e-839d-11e8-9c7c-5b1680efcdf5.jpg)
+![test2](https://user-images.githubusercontent.com/32021556/42466183-b694a82e-839d-11e8-9c7c-5b1680efcdf5.jpg= 175*133)
 By applying threshold 
 ![selection_020](https://user-images.githubusercontent.com/32021556/42466363-3ba7f188-839e-11e8-8e48-970fe6827f9c.png)
 
 
 Result:
 [[0.45063314 0.51786035 0.03150653]]
+
+
 Probability that the arrow points upwards= 0.45063314
+
+
 Probabilty that the arrow points towards left= 0.51786035
+
+
 Probabilty that the arrow points towards right= 0.03150653
