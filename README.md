@@ -16,7 +16,7 @@ Arrow pointing towards left
 
 #Results:
 
-<a href="url"><img src="![test2](https://user-images.githubusercontent.com/32021556/42466671-1606007c-839f-11e8-96a4-dce0a3e2d39a.jpg)" align="left" height="175" width="133" ></a>
+![test2](https://user-images.githubusercontent.com/32021556/42466671-1606007c-839f-11e8-96a4-dce0a3e2d39a.jpg){:height="175px" width="133px"}
 By applying threshold 
 ![selection_020](https://user-images.githubusercontent.com/32021556/42466363-3ba7f188-839e-11e8-8e48-970fe6827f9c.png)
 
