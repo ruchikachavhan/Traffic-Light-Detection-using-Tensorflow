@@ -14,7 +14,7 @@ Arrow pointing upwards
 ![4832onlygreen](https://user-images.githubusercontent.com/32021556/42446199-f132af3c-8364-11e8-9afc-c3d0a5de45e8.jpg)
 Arrow pointing towards left
 
-#Results:
+Results:
 
 ![selection_021](https://user-images.githubusercontent.com/32021556/42467021-43f2521e-83a0-11e8-80e0-026921a0ce0a.png)
 By applying threshold 
