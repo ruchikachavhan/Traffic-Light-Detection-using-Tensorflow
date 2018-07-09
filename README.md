@@ -4,5 +4,3 @@ Detection of the direction of green light arrow(up, right and left).
 thresholding green out of the images -> resizing images into 100*100 ->  three layered convolutinal network.
 
 
-
-![Test Image 1](29.png)
