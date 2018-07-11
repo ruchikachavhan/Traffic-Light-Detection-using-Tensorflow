@@ -17,7 +17,7 @@ Arrow pointing towards left
 Results:
 
 ![selection_021](https://user-images.githubusercontent.com/32021556/42467021-43f2521e-83a0-11e8-80e0-026921a0ce0a.png)
-By applying threshold 
+                                           By applying threshold -> 
 ![selection_020](https://user-images.githubusercontent.com/32021556/42466363-3ba7f188-839e-11e8-8e48-970fe6827f9c.png)
 
 
